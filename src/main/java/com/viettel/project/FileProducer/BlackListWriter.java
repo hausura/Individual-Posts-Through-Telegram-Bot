@@ -11,6 +11,7 @@ public class BlackListWriter {
     public BlackListWriter(Queue<Long> blackList){
         this.blackList=blackList;
     }
+
     public void writeBlackListToFile() {
         String filePath = "src/main/resources/config/blackList.txt";
 
