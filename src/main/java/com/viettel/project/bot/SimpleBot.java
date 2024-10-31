@@ -6,6 +6,7 @@ import com.viettel.project.bot.logic.RuleRequest;
 import com.viettel.project.config.AllConfig;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -31,6 +32,9 @@ public class SimpleBot extends TelegramLongPollingBot {
             try {
                 if (messageText.startsWith("/")) {
                     SendMessage res = commandHandler.handleCommand(update);
+                    execute(res);
+                } else if (messageText.contains(allConfig.getBotName())) {
+                    SendMessage res = messageHandler.handleMessage(update);
                     execute(res);
                 } else {
                     execute(messageHandler.handleMessage(update));

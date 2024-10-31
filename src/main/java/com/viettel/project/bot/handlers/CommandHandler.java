@@ -143,6 +143,8 @@ public class CommandHandler{
             response.setText("Num login over limit");
             if(!blackList.contains(userId)){
                 blackList.add(userId);
+                BlackListWriter blackListWriter = new BlackListWriter(blackList);
+                blackListWriter.writeBlackListToFile();
                 System.out.println("blackList: "+blackList);
             }
         }
@@ -166,8 +168,6 @@ public class CommandHandler{
             }
             else{response.setText("Wrong url syntax.");}
         }
-        BlackListWriter blackListWriter = new BlackListWriter(blackList);
-        blackListWriter.writeBlackListToFile();
         return response;
     }
 }
