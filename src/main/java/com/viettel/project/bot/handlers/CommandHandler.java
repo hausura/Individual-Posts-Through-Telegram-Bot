@@ -1,5 +1,6 @@
 package com.viettel.project.bot.handlers;
 
+import com.viettel.project.FileProducer.BlackListWriter;
 import com.viettel.project.bot.logic.RuleRequest;
 import com.viettel.project.config.AllConfig;
 import com.viettel.project.service.AuthService;
@@ -165,6 +166,8 @@ public class CommandHandler{
             }
             else{response.setText("Wrong url syntax.");}
         }
+        BlackListWriter blackListWriter = new BlackListWriter(blackList);
+        blackListWriter.writeBlackListToFile();
         return response;
     }
 }
