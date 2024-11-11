@@ -25,10 +25,12 @@ public class CommandHandler{
     private final Pattern articlePattern = Pattern.compile("^https://.*$");
     private final Pattern fbTargetIdPattern = Pattern.compile("([A-Za-z0-9_]+)_([A-Za-z0-9_]+)");
     private static final Logger logger = LoggerFactory.getLogger(CommandHandler.class);
+    private AllConfig allConfig;
 
     public CommandHandler(AllConfig allConfig) {
         this.authService = new AuthService(allConfig);
         this.ruleRequest = new RuleRequest(allConfig);
+        this.allConfig = allConfig;
     }
 
 

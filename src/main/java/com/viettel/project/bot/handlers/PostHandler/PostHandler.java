@@ -92,7 +92,8 @@ public class PostHandler {
                 } else {
                     response.setText("Push fail");
                     logger.error("Error post article api: {}",res);
-                }            }
+                }
+            }
         }
     }
 }

@@ -16,7 +16,6 @@ public class FacebookPusher {
     private static final Logger logger = LoggerFactory.getLogger(FacebookPusher.class);
 
     public String pushTargetIdData(FbPushJobModel fbPushJobModel) {
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         RestTemplate restTemplate = new RestTemplate();
@@ -27,12 +26,17 @@ public class FacebookPusher {
     }
 
     public String pushLink(List<String> fbLink){
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        RestTemplate restTemplate = new RestTemplate();
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            RestTemplate restTemplate = new RestTemplate();
 
-        HttpEntity<List<String>> request =
-                new HttpEntity<>(fbLink, headers);
-        return restTemplate.postForObject("http://10.30.154.242:8003/push_job",request, String.class);
+            HttpEntity<List<String>> request =
+                    new HttpEntity<>(fbLink, headers);
+            return restTemplate.postForObject("http://10.30.154.242:8003/push_job",request, String.class);
+        } catch (Exception e) {
+            logger.error("Unexpected error: {}", e.getMessage(), e);
+        }
+        return "error";
     }
 }

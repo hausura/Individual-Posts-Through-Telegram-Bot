@@ -13,6 +13,7 @@ public class AllConfig {
     private String botName;
     private String botToken;
     private String geminiApiKey;
+    private String splitSymbol;
 
     private Map<Long, User> listUser = new HashMap<>();
 
@@ -44,6 +45,10 @@ public class AllConfig {
     public String geminiApiKey(){
         return this.geminiApiKey;
     }
+
+    public String getSplitUrl() {
+        return splitSymbol;
+    }
     //Handle loader
     public void loadConfig() {
         List<String> whitelist = new ArrayList<>();
@@ -54,6 +59,7 @@ public class AllConfig {
         String geminiApiKey= "";
         Integer maxRequest = 0;
         Integer maxLogin = 0;
+        String splitSymbol = "";
         try (BufferedReader input =new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/config/config.properties")))) {
             // Tải file properties
             properties.load(input);
@@ -65,6 +71,7 @@ public class AllConfig {
             botToken = properties.getProperty("botToken");
             botName = properties.getProperty("botName");
             geminiApiKey = properties.getProperty("geminiApiKey");
+            splitSymbol = properties.getProperty("splitSymbol");
             //System.out.println("whitelistString: "+whitelistString);
             if (!whitelistString.strip().isEmpty()) {
                 String[] whitelistArray = whitelistString.split(",");
@@ -84,7 +91,8 @@ public class AllConfig {
         this.maxLogin = maxLogin;
         this.botName = botName;
         this.botToken = botToken;
-        this.geminiApiKey=geminiApiKey;
+        this.geminiApiKey = geminiApiKey;
+        this.splitSymbol = splitSymbol;
     }
 
     public void updateUserList(Long userId,User user) {
