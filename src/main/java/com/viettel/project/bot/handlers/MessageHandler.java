@@ -1,5 +1,6 @@
 package com.viettel.project.bot.handlers;
 
+import com.viettel.project.config.AllConfig;
 import com.viettel.project.service.GeminiApiService;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -9,7 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MessageHandler {
-    private final GeminiApiService geminiApiClient = new GeminiApiService();
+    private GeminiApiService geminiApiClient;
+
+    public MessageHandler(AllConfig allConfig) {
+        this.geminiApiClient = new GeminiApiService(allConfig);
+    }
 
     public SendMessage handleMessage(Update update){
         String chatId = update.getMessage().getChatId().toString();

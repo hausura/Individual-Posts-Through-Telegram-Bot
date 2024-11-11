@@ -1,5 +1,6 @@
 package com.viettel.project.service;
 
+import com.viettel.project.config.AllConfig;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -7,8 +8,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class GeminiApiService {
-    private static final String API_KEY = "AIzaSyCUf7U4-VGZSUpv_r7Vey1ENV04vdFcPoM";
-    private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
+    private String API_KEY ;
+    private final String GEMINI_URL;
+
+    public GeminiApiService(AllConfig allConfig){
+        API_KEY = allConfig.geminiApiKey();
+        GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
+    }
 
     public String getGeminiResponse(String userPrompt) throws IOException {
         OkHttpClient client = new OkHttpClient();
@@ -54,9 +60,4 @@ public class GeminiApiService {
         }
         return "No message text found.";
     }
-
-//    public static void main(String[] args) throws IOException {
-//        GeminiApiService geminiApiService = new GeminiApiService();
-//        System.out.println(parseMessageText(geminiApiService.getGeminiResponse("xin chào")));
-//    }
 }

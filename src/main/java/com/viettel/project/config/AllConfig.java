@@ -12,6 +12,8 @@ public class AllConfig {
     private Integer maxRequest;
     private String botName;
     private String botToken;
+    private String geminiApiKey;
+
     private Map<Long, User> listUser = new HashMap<>();
 
     // Get data from config
@@ -39,6 +41,9 @@ public class AllConfig {
         return whitelist.contains(id.toString());
     }
 
+    public String geminiApiKey(){
+        return this.geminiApiKey;
+    }
     //Handle loader
     public void loadConfig() {
         List<String> whitelist = new ArrayList<>();
@@ -46,6 +51,7 @@ public class AllConfig {
         String password = "";
         String botToken = "";
         String botName = "";
+        String geminiApiKey= "";
         Integer maxRequest = 0;
         Integer maxLogin = 0;
         try (BufferedReader input =new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/config/config.properties")))) {
@@ -58,6 +64,7 @@ public class AllConfig {
             maxLogin = Integer.parseInt(properties.getProperty("maxLogin"));
             botToken = properties.getProperty("botToken");
             botName = properties.getProperty("botName");
+            geminiApiKey = properties.getProperty("geminiApiKey");
             //System.out.println("whitelistString: "+whitelistString);
             if (!whitelistString.strip().isEmpty()) {
                 String[] whitelistArray = whitelistString.split(",");
@@ -77,15 +84,10 @@ public class AllConfig {
         this.maxLogin = maxLogin;
         this.botName = botName;
         this.botToken = botToken;
+        this.geminiApiKey=geminiApiKey;
     }
 
-    public void updateUserList(Long userId,User user){
-        this.listUser.put(userId,user);
-    }
-
-    public static void main(String[] args) {
-        AllConfig allConfig =new AllConfig();
-        allConfig.loadConfig();
-        System.out.println(allConfig.getBotName());
+    public void updateUserList(Long userId,User user) {
+        this.listUser.put(userId, user);
     }
 }

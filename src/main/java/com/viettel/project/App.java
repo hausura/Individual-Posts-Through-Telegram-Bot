@@ -1,6 +1,7 @@
 package com.viettel.project;
 
 import com.viettel.project.bot.SimpleBot;
+import com.viettel.project.config.AllConfig;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -19,7 +20,9 @@ public class App {
             // Config reload Register your bot
             scheduler.scheduleAtFixedRate(() -> {
                 try {
-                    botsApi.registerBot(new SimpleBot());
+                    AllConfig allConfig =new AllConfig();
+                    allConfig.loadConfig();
+                    botsApi.registerBot(new SimpleBot(allConfig));
                 } catch (TelegramApiException e) {
                     throw new RuntimeException(e);
                 }

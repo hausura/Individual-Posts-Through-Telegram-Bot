@@ -15,7 +15,7 @@ public class BlackListWriter {
     public void writeBlackListToFile() {
         String filePath = "src/main/resources/config/blackList.txt";
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))) {
             for (Long id : blackList) {
                 writer.write(id.toString());
                 writer.newLine();

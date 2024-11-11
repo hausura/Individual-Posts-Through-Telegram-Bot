@@ -1,16 +1,18 @@
 package com.viettel.project.bot.handlers;
 
 import com.viettel.project.FileProducer.BlackListWriter;
+import com.viettel.project.bot.handlers.Extractor.Extractor;
+import com.viettel.project.bot.handlers.PostHandler.PostHandler;
 import com.viettel.project.bot.logic.RuleRequest;
 import com.viettel.project.config.AllConfig;
 import com.viettel.project.service.AuthService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class CommandHandler{
@@ -20,47 +22,41 @@ public class CommandHandler{
     private final Pattern facebookPattern = Pattern.compile("^https://www\\.facebook\\.com/\\w+/posts/[\\w-]+\\??.*$");
     private final Pattern youtubePattern = Pattern.compile("^https://www\\.youtube\\.com/watch\\?v=[\\w-]+(&.*)?$");
     private final Pattern tiktokPattern = Pattern.compile("^https://www\\.tiktok\\.com/@[\\w.]+/video/\\d+$");
+    private final Pattern articlePattern = Pattern.compile("^https://.*$");
+    private final Pattern fbTargetIdPattern = Pattern.compile("([A-Za-z0-9_]+)_([A-Za-z0-9_]+)");
+    private static final Logger logger = LoggerFactory.getLogger(CommandHandler.class);
 
     public CommandHandler(AllConfig allConfig) {
         this.authService = new AuthService(allConfig);
         this.ruleRequest = new RuleRequest(allConfig);
     }
 
-    private static String extractPassword(String rawPassword){
-        int rawPasswordLength= rawPassword.length();
-        String lastSymbol=rawPassword.substring(rawPasswordLength-1,rawPasswordLength);
-        if (Arrays.asList(rawPassword.split("<")).size() <2| !lastSymbol.equals(">")) {
-            return "";
-        }
-        return Arrays.asList(rawPassword.split("<")).get(1).replace(">","");
-    }
-
-    private static String extractLink(String fullCommand,String simpleCommand){
-        String url;
-        url=fullCommand.replace(simpleCommand,"").strip();
-        System.out.println("url: "+url);
-        return url;
-    }
 
     private void handlePasswordCommand(String command,Long userId, SendMessage response){
-        String password = extractPassword(command).strip();
+        String password = Extractor.extractPassword(command).strip();
         if (!authService.isWhitelisted(userId)){
             response.setText("Your account has not been verified");
         }
         else if (!password.isEmpty()) {
             boolean isAuthenticated = authService.authenticate(userId, password);
-            System.out.println("user password:"+ password);
+            logger.info("user password:{}", password);
 
             if (isAuthenticated) {
                 authService.updateLoginStt(userId,true);
-                response.setText("Input password success! \n"+
-                        "Please input your token by command below \n"+
-                        "/add_facebook "+
-                        "insert_your_link_here \n"+
-                        "/add_youtube "+
-                        "insert_your_link_here \n"+
-                        "/add_tiktok "+
-                        "insert_your_link_here \n");
+                response.setText("""
+                        Input password success!\s
+                        Please input your token by command below\s
+                        /add_facebook_url \
+                        insert_your_link_here\s
+                        add_facebook_target_id \
+                        insert_your_link_here\s
+                        /add_youtube \
+                        insert_your_link_here\s
+                        /add_tiktok \
+                        insert_your_link_here\s
+                        /add_article \
+                        insert_your_link_here\s
+                        """);
             } else {
                 response.setText("Wrong password, please try again.");
             }
@@ -70,32 +66,43 @@ public class CommandHandler{
         }
     }
 
-    private void handleAddPostsCommand(String command,Long userId, SendMessage response){
-        List<String> addCommand = Arrays.asList("/add_facebook","/add_youtube","/add_tiktok");
-        String simpleCommand= Arrays.asList(command.split(" ")).get(0);
-        String url = extractLink(command,simpleCommand);
+    private void handleAddPostsCommand(String command, Long userId, SendMessage response) {
+        String simpleCommand = Arrays.asList(command.split(" ")).get(0);
+        List<String> urlList = Extractor.extractLink(command, simpleCommand);
 
-        if (url.isEmpty()) {response.setText("Please provide url."); return;}
+        if (urlList.isEmpty()) {
+            response.setText("Please provide url.");
+            return;
+        }
 
-        if (ruleRequest.checkNumPush(userId)==0) {
+        if (ruleRequest.checkNumPush(userId) == 0) {
             response.setText("Your push time over limit.");
+            return;
         }
-        else if (simpleCommand.equals(addCommand.get(0))
-                && facebookPattern.matcher(url).matches()){
-            response.setText("Push facebook url done.");
-            ruleRequest.updateNumPush(userId);
+
+        PostHandler handler = null;
+        switch (simpleCommand) {
+            case "/add_facebook_target_id":
+                handler = new PostHandler(facebookPattern, "facebook_target_id", ruleRequest);
+                break;
+            case "/add_facebook_url":
+                handler = new PostHandler(fbTargetIdPattern, "facebook_url", ruleRequest);
+                break;
+            case "/add_youtube":
+                handler = new PostHandler(youtubePattern, "youtube", ruleRequest);
+                break;
+            case "/add_tiktok":
+                handler = new PostHandler(tiktokPattern, "tiktok", ruleRequest);
+                break;
+            case "/add_article":
+                handler = new PostHandler(articlePattern, "article", ruleRequest);
+                break;
         }
-        else if (simpleCommand.equals(addCommand.get(1))
-                && youtubePattern.matcher(url).matches()
-                && ruleRequest.checkNumPush(userId)==1){
-            response.setText("Push youtube url done.");
-            ruleRequest.updateNumPush(userId);
-        }
-        else if (simpleCommand.equals(addCommand.get(2))
-                && tiktokPattern.matcher(url).matches()
-                && ruleRequest.checkNumPush(userId)==1) {
-            response.setText("Push tiktok url done.");
-            ruleRequest.updateNumPush(userId);
+
+        if (handler != null) {
+            handler.processUrls(userId, urlList, response);
+            // TO DO: add API handle
+            handler.pushData(urlList,response);
         }
     }
 
@@ -107,7 +114,6 @@ public class CommandHandler{
         String command = update.getMessage().getText();
         Pattern passwordPattern = Pattern.compile("^/password\\s*.*$");
 
-
         SendMessage response = new SendMessage();
         response.setChatId(chatId);
         if(blackList.contains(userId)) return response;
@@ -115,29 +121,31 @@ public class CommandHandler{
         //Start and instruction command
         if (command.equals("/start")) {
             //Get user id
-            System.out.println("UserID: "+userId);
+            logger.info("UserID: {}", userId);
             response.setText("Bot is running!");
             return response;
         }
 
         else if(command.equals("/logout")) {
             //Get user id
-            System.out.println("UserID: "+userId);
+            logger.info("UserID: {}", userId);
             response.setText("Log out success!");
             authService.updateLoginStt(userId,false);
             return response;
         }
 
         else if (command.equals("/help")) {
-            response.setText("Individual Posts bot is responsible for importing Posts into " +
-                    "the crawler system from external network, commands includes:" +
-                    "\n /start           check bot status" +
-                    "\n /password        login to command" +
-                    "\n /help        commands instruction" +
-                    "\n /add_facebook  add facebook posts" +
-                    "\n /add_youtube    add youtube posts" +
-                    "\n /add_tiktok      add tiktok posts" +
-                    "\n /logout          log out ");
+            response.setText("""
+                    Individual Posts bot is responsible for importing Posts into \
+                    the crawler system from external network, commands includes:\
+                     /start           check bot status\
+                     /password        login to command\
+                     /help        commands instruction\
+                     /add_facebook  add facebook posts\
+                     /add_youtube    add youtube posts\
+                     /add_tiktok      add tiktok posts\
+                     /add_article     add article posts\
+                     /logout          log out\s""");
         }
         else if (ruleRequest.checkNumLogin(userId)==0) {
             response.setText("Num login over limit");
@@ -145,7 +153,7 @@ public class CommandHandler{
                 blackList.add(userId);
                 BlackListWriter blackListWriter = new BlackListWriter(blackList);
                 blackListWriter.writeBlackListToFile();
-                System.out.println("blackList: "+blackList);
+                logger.info("blackList: {}", blackList);
             }
         }
         //0. login check
@@ -156,7 +164,7 @@ public class CommandHandler{
         //Case logged in but wrong pass, syntax, ...
         //Not logged in success yet
         else if (!authService.getLoginStatus(userId)) {
-            if(command.contains("/add_facebook") | command.contains("/add_youtube") | command.contains("/add_tiktok")){
+            if(command.contains("/add_facebook") | command.contains("/add_youtube") | command.contains("/add_tiktok") | command.contains("/add_article")){
                 response.setText("Please provide your password by command /password <insert_your_password_here>");
             }
             else{response.setText("Wrong url syntax.");}

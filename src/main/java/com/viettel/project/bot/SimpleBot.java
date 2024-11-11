@@ -16,13 +16,13 @@ import java.util.concurrent.ScheduledExecutorService;
 public class SimpleBot extends TelegramLongPollingBot {
     private final CommandHandler commandHandler;
     private final MessageHandler messageHandler;
-    private AllConfig allConfig = new AllConfig();
+    private AllConfig allConfig;
 
 
-    public SimpleBot() {
-        allConfig.loadConfig();
+    public SimpleBot(AllConfig allConfig) {
+        this.allConfig=allConfig;
         this.commandHandler = new CommandHandler(allConfig);
-        this.messageHandler = new MessageHandler();
+        this.messageHandler = new MessageHandler(allConfig);
     }
 
     @Override
