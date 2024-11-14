@@ -20,7 +20,7 @@ public class CheckPatternHandler {
     private final String patternStr;
     private final String platform;
     private final RuleRequest ruleRequest;
-    private String action;
+    private final String action;
 
     public CheckPatternHandler(String patternStr, String platform, RuleRequest ruleRequest,String action) {
         this.patternStr = patternStr;

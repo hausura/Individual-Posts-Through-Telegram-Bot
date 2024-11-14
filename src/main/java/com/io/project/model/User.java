@@ -1,9 +1,20 @@
 package com.io.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class User {
+    @Setter
+    @Getter
     Long userId;
+    @Setter
+    @Getter
     String password;
+    @Setter
+    @Getter
     Integer numRequest;
+    @Setter
+    @Getter
     Integer numLogin;
     Boolean isLogin;
     public User(Long userId, String password,Integer numRequest,Integer numLogin,Boolean isLogin){
@@ -14,40 +25,8 @@ public class User {
         this.isLogin=isLogin;
     }
 
-    public Integer getNumLogin() {
-        return numLogin;
-    }
-
-    public void setNumLogin(Integer numLogin) {
-        this.numLogin = numLogin;
-    }
-
-    public Integer getNumRequest() {
-        return numRequest;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public Boolean getLogin() {
         return isLogin;
-    }
-
-    public void setNumRequest(Integer numRequest) {
-        this.numRequest = numRequest;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public void setLogin(Boolean login) {

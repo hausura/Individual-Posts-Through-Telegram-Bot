@@ -1,5 +1,8 @@
 package com.io.project.model;
 
+import lombok.Getter;
+
+@Getter
 public class FacebookIdModel {
     Integer id= 0;
     String target_id; //716550913529554_886364173253325",
@@ -27,46 +30,6 @@ public class FacebookIdModel {
         this.token_action = token_action;
         this.object_depend = object_depend;
         this.priority = priority;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getTarget_id() {
-        return target_id;
-    }
-
-    public String getProfile_type() {
-        return profile_type;
-    }
-
-    public String getJob_action() {
-        return job_action;
-    }
-
-    public String getJob_output() {
-        return job_output;
-    }
-
-    public String getTime_start() {
-        return time_start;
-    }
-
-    public String getTime_stop() {
-        return time_stop;
-    }
-
-    public String getToken_action() {
-        return token_action;
-    }
-
-    public String getObject_depend() {
-        return object_depend;
-    }
-
-    public String getPriority() {
-        return priority;
     }
 
     @Override
