@@ -1,63 +1,37 @@
 package com.io.project.config;
 
 import com.io.project.model.User;
+import lombok.Getter;
 
 import java.io.*;
 import java.util.*;
 
 public class AllConfig {
     private List<String> whitelist = new ArrayList<>();
-    private String password ;
+    @Getter
     private Integer maxLogin;
+    @Getter
     private Integer maxRequest;
+    @Getter
     private String botName;
+    @Getter
     private String botToken;
     private String geminiApiKey;
     private String splitSymbol;
+    @Getter
     private String facebookApiUrl;
+    @Getter
     private String facebookApiTarget;
+    @Getter
     private String youtubeApi;
+    @Getter
     private String articleApi;
+    @Getter
     private String tiktokApi;
 
-    private Map<Long, User> listUser = new HashMap<>();
-
     // Get data from config
-    public Map<Long, User> getListUser() {
-        return listUser;
-    }
-
-    public String getBotName() {
-        return botName;
-    }
-
-    public String getBotToken() {
-        return botToken;
-    }
-
-    public Integer getMaxRequest() {
-        return this.maxRequest;
-    }
-
-    public Integer getMaxLogin() {
-        return this.maxLogin;
-    }
-
-    public String getFacebookApiUrl() {
-        return facebookApiUrl;
-    }
-
-    public String getFacebookApiTarget() {
-        return facebookApiTarget;
-    }
-
-    public String getYoutubeApi() {
-        return youtubeApi;
-    }
-
-    public String getArticleApi() {
-        return articleApi;
-    }
+    @Getter
+    private Map<Long, User> listUser = new HashMap<>();
 
     public boolean isWhitelisted(Long id) {
         return whitelist.contains(id.toString());
@@ -74,12 +48,12 @@ public class AllConfig {
     public void loadConfig() {
         List<String> whitelist = new ArrayList<>();
         Properties properties = new Properties();
-        String password = "";
+        String password;
         String botToken = "";
         String botName = "";
         String geminiApiKey= "";
-        Integer maxRequest = 0;
-        Integer maxLogin = 0;
+        int maxRequest = 0;
+        int maxLogin = 0;
         String splitSymbol = "";
         String facebookApiUrl = "";
         String facebookApiTarget = "";
@@ -87,7 +61,7 @@ public class AllConfig {
         String tiktokApi = "";
         String articleApi = "";
 
-        try (BufferedReader input =new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/config/config.properties")))) {
+        try (BufferedReader input =new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/config/config.properties"))))) {
             // Tải file properties
             properties.load(input);
 
@@ -107,7 +81,7 @@ public class AllConfig {
             articleApi = properties.getProperty("articleApi");
 
             // Khởi tạo user và password trong config
-            if (!whitelistString.strip().isEmpty()) {
+            if (!whitelistString.isBlank()) {
                 String[] whitelistArray = whitelistString.split(",");
                 whitelist.addAll(Arrays.asList(whitelistArray));
                 for(String userId: whitelist){
@@ -120,7 +94,6 @@ public class AllConfig {
             System.out.println("Lỗi khi đọc file: " + e.getMessage());
         }
         this.whitelist = whitelist;
-        this.password = password;
         this.maxRequest = maxRequest;
         this.maxLogin = maxLogin;
         this.botName = botName;
