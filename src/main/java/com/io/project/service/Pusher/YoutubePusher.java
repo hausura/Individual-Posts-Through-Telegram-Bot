@@ -1,5 +1,6 @@
 package com.io.project.service.Pusher;
 
+import com.io.project.config.AllConfig;
 import com.io.project.model.YoutubeModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,10 @@ import java.util.List;
 
 public class YoutubePusher {
     private static final Logger logger = LoggerFactory.getLogger(YoutubePusher.class);
+    private final AllConfig allConfig = new AllConfig();
     public String pushLink(List<String> youtubeLinkList,String action) {
         try {
+            allConfig.loadConfig();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -29,7 +32,7 @@ public class YoutubePusher {
             // Create an HttpEntity with the list of YoutubeModel objects
             logger.info("Start push youtube data to server");
             HttpEntity<List<YoutubeModel>> request = new HttpEntity<>(youtubeModelList, headers);
-            return restTemplate.postForObject("http://10.30.154.242:8003/push_job", request, String.class);
+            return restTemplate.postForObject(allConfig.getYoutubeApi(), request, String.class);
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage(), e);
         }

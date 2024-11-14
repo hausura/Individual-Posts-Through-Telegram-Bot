@@ -31,7 +31,7 @@ public class AllConfig {
 
     // Get data from config
     @Getter
-    private Map<Long, User> listUser = new HashMap<>();
+    private final Map<Long, User> listUser = new HashMap<>();
 
     public boolean isWhitelisted(Long id) {
         return whitelist.contains(id.toString());

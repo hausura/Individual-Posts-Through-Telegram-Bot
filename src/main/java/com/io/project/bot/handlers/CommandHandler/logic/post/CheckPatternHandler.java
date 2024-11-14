@@ -92,7 +92,8 @@ public class CheckPatternHandler {
                 // TO DO
             }
             case "article" -> {
-                ArticleResSchema res = ArticlePusher.pushLink(urlOrId);
+                ArticlePusher articlePusher = new ArticlePusher();
+                ArticleResSchema res = articlePusher.pushLink(urlOrId);
                 if (res.getMessage().equals("Success")) {
                     response.setText("Push success");
                 } else {
