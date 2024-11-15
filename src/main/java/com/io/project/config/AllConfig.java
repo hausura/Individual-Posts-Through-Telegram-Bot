@@ -2,11 +2,15 @@ package com.io.project.config;
 
 import com.io.project.model.User;
 import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.*;
 
 public class AllConfig {
+    private static final Logger logger = LoggerFactory.getLogger(AllConfig.class);
+
     private List<String> whitelist = new ArrayList<>();
     @Getter
     private Integer maxLogin;
@@ -61,8 +65,10 @@ public class AllConfig {
         String tiktokApi = "";
         String articleApi = "";
 
-        try (BufferedReader input =new BufferedReader(new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream("/config/config.properties"))))) {
-            // Tải file properties
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config/config.properties")) {
+            if (input == null) {
+                logger.error("Property file not found");
+            }            // Tải file properties
             properties.load(input);
 
             // Lấy danh sách whitelist và chia tách thành mảng
@@ -91,7 +97,7 @@ public class AllConfig {
             }
             System.out.println(whitelist);
         } catch (IOException e) {
-            System.out.println("Lỗi khi đọc file: " + e.getMessage());
+            logger.error("Lỗi khi đọc file: {}", e.getMessage());
         }
         this.whitelist = whitelist;
         this.maxRequest = maxRequest;

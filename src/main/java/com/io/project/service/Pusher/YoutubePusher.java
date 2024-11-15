@@ -1,6 +1,7 @@
 package com.io.project.service.Pusher;
 
 import com.io.project.config.AllConfig;
+import com.io.project.config.Define;
 import com.io.project.model.YoutubeModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,11 @@ public class YoutubePusher {
             // Create an HttpEntity with the list of YoutubeModel objects
             logger.info("Start push youtube data to server");
             HttpEntity<List<YoutubeModel>> request = new HttpEntity<>(youtubeModelList, headers);
+
+            // Log info
+            logger.info(Define.API_URL_LOG,allConfig.getYoutubeApi());
+            logger.info(Define.REQUEST_LOG,request);
+
             return restTemplate.postForObject(allConfig.getYoutubeApi(), request, String.class);
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage(), e);

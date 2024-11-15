@@ -24,12 +24,16 @@ public class App {
             // Config reload Register your bot
             scheduler.scheduleAtFixedRate(() -> {
                 try {
+                    logger.info("Start register chatbot");
                     AllConfig allConfig =new AllConfig();
+
+                    logger.info("Load config");
                     allConfig.loadConfig();
+
                     botsApi.registerBot(new SimpleBot(allConfig));
                     logger.info("Chatbot register success!");
                 } catch (TelegramApiException e) {
-                    throw new RuntimeException(e);
+                    logger.error("Error chatbot register: {}",e);
                 }
             }, 0, 24, TimeUnit.HOURS);
 

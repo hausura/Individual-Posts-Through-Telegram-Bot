@@ -10,8 +10,8 @@ import java.util.Map;
 import static com.io.project.Utilities.PasswordUtility.hashPassword;
 
 public class AuthService {
-    private AllConfig allConfig;
-    private Map<Long, String> userIdPassword = new HashMap<>();
+    private final AllConfig allConfig;
+    private final Map<Long, String> userIdPassword = new HashMap<>();
 
     public AuthService(AllConfig allConfig){
         this.allConfig=allConfig;

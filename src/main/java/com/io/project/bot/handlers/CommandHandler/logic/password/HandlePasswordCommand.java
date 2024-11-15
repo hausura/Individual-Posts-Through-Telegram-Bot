@@ -28,9 +28,11 @@ public class HandlePasswordCommand {
                         +
                         Define.FB_URL_COMMAND + " <action> " +
                         "<insert_your_link_here> \n" +
-                        Define.FB_URL_COMMAND + " <action> " +
+                        Define.FB_ID_COMMAND + " <action> " +
                         "<insert_your_link_here> \n" +
                         Define.YT_COMMAND + " <action> " +
+                        "<insert_your_link_here> \n" +
+                        Define.TIKTOK_COMMAND + " <action> " +
                         "<insert_your_link_here> \n" +
                         Define.AT_COMMAND + " <action> " +
                         "<insert_your_link_here> \n"

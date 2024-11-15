@@ -14,4 +14,9 @@ public class Define {
     public static final String YOUTUBE_REGEX = "^https://www\\.youtube\\.com/watch\\?v=[\\w-]+(&.*)?$";
     public static final String TIKTOK_REGEX = "^https://www\\.tiktok\\.com/@[\\w.]+/video/\\d+$";
     public static final String ARTICLE_REGEX = "^https://.*$";
+
+    // Logger
+    public static final String API_URL_LOG = "Api url: {}";
+    public static final String REQUEST_LOG = "Request data: {}";
+
 }

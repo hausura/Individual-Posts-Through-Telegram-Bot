@@ -1,7 +1,10 @@
 package com.io.project.schema;
 
+import lombok.Getter;
+
 public class ArticleResSchema {
     String code;
+    @Getter
     String message;
     String data;
 
@@ -11,7 +14,4 @@ public class ArticleResSchema {
         this.data = data;
     }
 
-    public String getMessage() {
-        return message;
-    }
 }

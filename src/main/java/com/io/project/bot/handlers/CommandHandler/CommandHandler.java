@@ -22,12 +22,10 @@ public class CommandHandler{
     private final Queue<Long> blackList = new ArrayDeque<>();
     private final AuthService authService;
     private final RuleRequest ruleRequest;
-    private final AllConfig allConfig;
 
     public CommandHandler(AllConfig allConfig) {
         this.authService = new AuthService(allConfig);
         this.ruleRequest = new RuleRequest(allConfig);
-        this.allConfig = allConfig;
     }
 
     // Start from here
@@ -64,13 +62,19 @@ public class CommandHandler{
                     Individual Posts bot is responsible for importing Posts into \
                     the crawler system from external network, commands includes:\
                     \n
-                     /start           check bot status\n
-                     /password        login to command\n
-                     /help        commands instruction\n
-                     /add_facebook  add facebook posts\n
-                     /add_youtube    add youtube posts\n
-                     /add_tiktok      add tiktok posts\n
-                     /add_article     add article posts\n
+                     /start           check bot status
+                   \s
+                     /password        login to command
+                   \s
+                     /help        commands instruction
+                   \s
+                    \s"""   +
+                    Define.FB_ID_COMMAND + " add target_id\n" +
+                    Define.FB_URL_COMMAND + " add facebook post\n" +
+                    Define.YT_COMMAND + " add youtube posts\n" +
+                    Define.TIKTOK_COMMAND + " add tiktok posts\n" +
+                    Define.AT_COMMAND + " add article posts\n" +
+                    """
                      /logout          log out\s""");
         }
         else if (ruleRequest.checkNumLogin(userId)==0) {

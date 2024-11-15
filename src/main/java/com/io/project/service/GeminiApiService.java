@@ -8,11 +8,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class GeminiApiService {
-    private String API_KEY ;
     private final String GEMINI_URL;
 
     public GeminiApiService(AllConfig allConfig){
-        API_KEY = allConfig.geminiApiKey();
+        String API_KEY = allConfig.geminiApiKey();
         GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
     }
 
@@ -51,10 +50,10 @@ public class GeminiApiService {
 
         // Navigate through the JSON structure
         JSONArray candidates = jsonObject.getJSONArray("candidates");
-        if (candidates.length() > 0) {
+        if (!candidates.isEmpty()) {
             JSONObject content = candidates.getJSONObject(0).getJSONObject("content");
             JSONArray parts = content.getJSONArray("parts");
-            if (parts.length() > 0) {
+            if (!parts.isEmpty()) {
                 return parts.getJSONObject(0).getString("text");
             }
         }

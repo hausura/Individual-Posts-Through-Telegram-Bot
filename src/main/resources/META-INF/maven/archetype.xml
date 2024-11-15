@@ -3,6 +3,9 @@
   <sources>
     <source>src/main/java/App.java</source>
   </sources>
+  <resources>
+    <resource>src/main/resources/config/config.properties</resource>
+  </resources>
   <testSources>
     <source>src/test/java/AppTest.java</source>
   </testSources>
