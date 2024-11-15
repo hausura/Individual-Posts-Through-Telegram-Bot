@@ -2,7 +2,6 @@ package com.io.project.bot.handlers.CommandHandler.logic.post;
 
 import com.io.project.bot.rule.RuleRequest;
 import com.io.project.model.FacebookIdModel;
-import com.io.project.schema.ArticleResSchema;
 import com.io.project.service.Pusher.ArticlePusher;
 import com.io.project.service.Pusher.FacebookPusher;
 import com.io.project.service.Pusher.YoutubePusher;
@@ -78,7 +77,7 @@ public class CheckPatternHandler {
             }
             case "article" -> {
                 ArticlePusher articlePusher = new ArticlePusher();
-                ArticleResSchema res = articlePusher.pushLink(urlOrId);
+                String res = articlePusher.pushLink(urlOrId);
                 response.setText(res.toString());
             }
         }

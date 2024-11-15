@@ -2,7 +2,6 @@ package com.io.project.service.Pusher;
 
 import com.io.project.config.AllConfig;
 import com.io.project.config.Define;
-import com.io.project.schema.ArticleResSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -16,7 +15,7 @@ public class ArticlePusher {
     private static final Logger logger = LoggerFactory.getLogger(ArticlePusher.class);
     private final AllConfig allConfig = new AllConfig();
 
-    public ArticleResSchema pushLink(List<String> articleLink){
+    public String pushLink(List<String> articleLink){
         try {
             allConfig.loadConfig();
             HttpHeaders headers = new HttpHeaders();
@@ -31,11 +30,11 @@ public class ArticlePusher {
             logger.info(Define.API_URL_LOG,allConfig.getArticleApi());
             logger.info(Define.REQUEST_LOG,request);
 
-            return restTemplate.postForObject(allConfig.getArticleApi(), request, ArticleResSchema.class);
+            return restTemplate.postForObject(allConfig.getArticleApi(), request, String.class);
         }
         catch (Exception e) {
         logger.error("Unexpected error: {}", e.getMessage(), e);
         }
-        return new ArticleResSchema("400","Error","");
+        return "400 Error";
     }
 }
