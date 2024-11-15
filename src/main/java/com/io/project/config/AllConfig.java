@@ -22,6 +22,7 @@ public class AllConfig {
     private String botToken;
     private String geminiApiKey;
     private String splitSymbol;
+    // API URL
     @Getter
     private String facebookApiUrl;
     @Getter
@@ -32,6 +33,18 @@ public class AllConfig {
     private String articleApi;
     @Getter
     private String tiktokApi;
+
+    // Pattern
+    @Getter
+    public String FB_URL_REGEX;
+    @Getter
+    public String FB_ID_REGEX;
+    @Getter
+    public String YOUTUBE_REGEX;
+    @Getter
+    public String TIKTOK_REGEX;
+    @Getter
+    public String ARTICLE_REGEX;
 
     // Get data from config
     @Getter
@@ -64,6 +77,11 @@ public class AllConfig {
         String youtubeApi = "";
         String tiktokApi = "";
         String articleApi = "";
+        String FB_URL_REGEX = "";
+        String FB_ID_REGEX = "";
+        String YOUTUBE_REGEX = "";
+        String TIKTOK_REGEX = "";
+        String ARTICLE_REGEX = "";
 
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("config/config.properties")) {
             if (input == null) {
@@ -85,6 +103,11 @@ public class AllConfig {
             youtubeApi = properties.getProperty("youtubeApi");
             tiktokApi = properties.getProperty("tiktokApi");
             articleApi = properties.getProperty("articleApi");
+            FB_URL_REGEX = properties.getProperty("FB_URL_REGEX");
+            FB_ID_REGEX = properties.getProperty("FB_ID_REGEX");
+            YOUTUBE_REGEX = properties.getProperty("YOUTUBE_REGEX");
+            TIKTOK_REGEX = properties.getProperty("TIKTOK_REGEX");
+            ARTICLE_REGEX = properties.getProperty("ARTICLE_REGEX");
 
             // Khởi tạo user và password trong config
             if (!whitelistString.isBlank()) {
@@ -111,6 +134,11 @@ public class AllConfig {
         this.youtubeApi = youtubeApi;
         this.tiktokApi = tiktokApi;
         this.articleApi = articleApi;
+        this.FB_URL_REGEX = FB_URL_REGEX;
+        this.FB_ID_REGEX = FB_ID_REGEX;
+        this.YOUTUBE_REGEX = YOUTUBE_REGEX;
+        this.TIKTOK_REGEX = TIKTOK_REGEX;
+        this.ARTICLE_REGEX = ARTICLE_REGEX;
     }
 
     public void updateUserList(Long userId,User user) {

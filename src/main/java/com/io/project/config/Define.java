@@ -8,13 +8,6 @@ public class Define {
     public static final String TIKTOK_COMMAND = "/add_tiktok";
     public static final String AT_COMMAND = "/add_article";
 
-    // Pattern
-    public static final String FB_URL_REGEX = "^https://www\\.facebook\\.com/\\w+/posts/[\\w-]+\\??.*$";
-    public static final String FB_ID_REGEX = "([A-Za-z0-9_]+)_([A-Za-z0-9_]+)";
-    public static final String YOUTUBE_REGEX = "^https://www\\.youtube\\.com/watch\\?v=[\\w-]+(&.*)?$";
-    public static final String TIKTOK_REGEX = "^https://www\\.tiktok\\.com/@[\\w.]+/video/\\d+$";
-    public static final String ARTICLE_REGEX = "^https://.*$";
-
     // Logger
     public static final String API_URL_LOG = "Api url: {}";
     public static final String REQUEST_LOG = "Request data: {}";

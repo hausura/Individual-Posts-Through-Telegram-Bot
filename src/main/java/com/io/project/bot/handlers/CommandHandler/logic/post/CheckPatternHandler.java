@@ -64,7 +64,7 @@ public class CheckPatternHandler {
             }
             case "facebook_url" -> {
                 FacebookPusher facebookPusher = new FacebookPusher();
-                String res = facebookPusher.pushLink(urlOrId).toString();
+                String res = facebookPusher.pushLink(urlOrId.get(0)).toString();
                 response.setText(res);
             }
             case "youtube" -> {

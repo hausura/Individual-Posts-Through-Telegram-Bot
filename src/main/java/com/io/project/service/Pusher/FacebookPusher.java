@@ -39,7 +39,7 @@ public class FacebookPusher {
         return "error";
     }
 
-    public String pushLink(List<String> fbLink){
+    public String pushLink(String fbLink){
         try {
             allConfig.loadConfig();
             HttpHeaders headers = new HttpHeaders();
@@ -47,7 +47,7 @@ public class FacebookPusher {
             RestTemplate restTemplate = new RestTemplate();
 
             logger.info("Start push facebook url data to server");
-            HttpEntity<List<String>> request =
+            HttpEntity<String> request =
                     new HttpEntity<>(fbLink, headers);
 
             // Log info

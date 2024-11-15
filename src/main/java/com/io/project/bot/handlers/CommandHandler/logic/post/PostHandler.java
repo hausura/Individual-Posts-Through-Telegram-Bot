@@ -2,6 +2,7 @@ package com.io.project.bot.handlers.CommandHandler.logic.post;
 
 import com.io.project.bot.handlers.CommandHandler.extractor.Extractor;
 import com.io.project.bot.rule.RuleRequest;
+import com.io.project.config.AllConfig;
 import com.io.project.config.Define;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
@@ -23,13 +24,14 @@ public class PostHandler {
             response.setText("Your push time over limit.");
             return;
         }
-
+        AllConfig allConfig = new AllConfig();
+        allConfig.loadConfig();
         CheckPatternHandler handler = switch (simpleCommand) {
-            case Define.FB_ID_COMMAND -> new CheckPatternHandler(Define.FB_ID_REGEX, "facebook_target_id", ruleRequest,action);
-            case Define.FB_URL_COMMAND -> new CheckPatternHandler(Define.FB_URL_REGEX  , "facebook_url", ruleRequest,action);
-            case Define.YT_COMMAND -> new CheckPatternHandler(Define.YOUTUBE_REGEX, "youtube", ruleRequest,action);
-            case Define.TIKTOK_COMMAND -> new CheckPatternHandler(Define.TIKTOK_REGEX, "tiktok", ruleRequest,action);
-            case Define.AT_COMMAND -> new CheckPatternHandler(Define.ARTICLE_REGEX, "article", ruleRequest,action);
+            case Define.FB_ID_COMMAND -> new CheckPatternHandler(allConfig.getFB_ID_REGEX(), "facebook_target_id", ruleRequest,action);
+            case Define.FB_URL_COMMAND -> new CheckPatternHandler(allConfig.getFB_URL_REGEX()  , "facebook_url", ruleRequest,action);
+            case Define.YT_COMMAND -> new CheckPatternHandler(allConfig.getYOUTUBE_REGEX(), "youtube", ruleRequest,action);
+            case Define.TIKTOK_COMMAND -> new CheckPatternHandler(allConfig.getTIKTOK_REGEX(), "tiktok", ruleRequest,action);
+            case Define.AT_COMMAND -> new CheckPatternHandler(allConfig.getARTICLE_REGEX(), "article", ruleRequest,action);
             default -> null;
         };
 
