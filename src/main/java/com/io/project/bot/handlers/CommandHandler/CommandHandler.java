@@ -58,14 +58,12 @@ public class CommandHandler{
         }
 
         else if (command.equals("/help")) {
-            response.setText("""
-                    Individual Posts bot is responsible for importing Posts into \
-                    the crawler system from external network, commands includes:\
-                    \n
-                     /start           check bot status \n
-                     /password        login to command \n
-                     /help        commands instruction \n
-                    """   +
+            response.setText(
+                    "Individual Posts bot is responsible for importing Posts into \n" +
+                    "the crawler system from external network, commands includes:\n \n" +
+                     "/start           check bot status \n" +
+                     "/password        login to command \n" +
+                     "/help        commands instruction \n" +
                     Define.FB_ID_COMMAND + " add target_id\n" +
                     Define.FB_URL_COMMAND + " add facebook post\n" +
                     Define.YT_COMMAND + " add youtube posts\n" +
@@ -90,18 +88,19 @@ public class CommandHandler{
         //Case logged in but wrong pass, syntax, ...
         //Not logged in success yet
         else if (!authService.getLoginStatus(userId)) {
-            if(command.contains(Define.FB_ID_COMMAND) | command.contains(Define.FB_URL_COMMAND) | command.contains(Define.YT_COMMAND) | command.contains(Define.TIKTOK_COMMAND) | command.contains(Define.AT_COMMAND)){
+            if (command.startsWith("/add")) {
                 response.setText("Please provide your password by command /password <insert_your_password_here>");
             }
-            else{response.setText("Wrong url syntax.");}
+            else{response.setText("Not authentic yet and wrong command syntax.");}
         }
         // 0. Logged in success
         else if (authService.getLoginStatus(userId)) {
-            if (command.startsWith("/add")) {
+            if(command.contains(Define.FB_ID_COMMAND) | command.contains(Define.FB_URL_COMMAND) | command.contains(Define.YT_COMMAND) | command.contains(Define.TIKTOK_COMMAND) | command.contains(Define.AT_COMMAND)){
                 PostHandler.handle(command,userId,response,ruleRequest);
             }
-            else{response.setText("Wrong url syntax.");}
+            else response.setText("Wrong command syntax.");
         }
+        else response.setText("Wrong command syntax.");
         return response;
     }
 }

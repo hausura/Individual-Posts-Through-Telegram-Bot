@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ec07ae7-7f42-4ea6-b8a7-42bfa288c52f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/Utilities/PasswordUtility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/bot/SimpleBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/bot/handlers/CommandHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/bot/handlers/MessageHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/bot/logic/RuleRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/config/AllConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/viettel/project/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/maven/archetype.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/main/java/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/test/java/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/password/HandlePasswordCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/password/HandlePasswordCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +25,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -57,13 +42,14 @@
     "Application.AllConfig.executor": "Run",
     "Application.App.executor": "Run",
     "Application.CommandHandler.executor": "Run",
+    "Application.com.io.project.App.executor": "Run",
     "Application.com.viettel.project.App.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/Individual Posts Through Telegram Bot/src/main/resources",
+    "last_opened_file_path": "D:/Projects/IndividualPostsThroughTelegramBot",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -74,7 +60,7 @@
       <recent name="D:\Projects\Individual Posts Through Telegram Bot\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.com.viettel.project.App">
+  <component name="RunManager" selected="Application.com.io.project.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk-17.0.2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -102,12 +88,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.viettel.project.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.viettel.project.App" />
+    <configuration name="com.io.project.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.io.project.App" />
       <module name="IndividualPostsThroughTelegramBot" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.viettel.project.*" />
+          <option name="PATTERN" value="com.io.project.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -117,7 +103,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.com.viettel.project.App" />
+        <item itemvalue="Application.com.io.project.App" />
         <item itemvalue="Application.App" />
         <item itemvalue="Application.CommandHandler" />
       </list>

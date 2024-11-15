@@ -23,7 +23,7 @@ public class HandlePasswordCommand {
                 authService.updateLoginStt(userId,true);
                 response.setText("""
                         Input password success!\s
-                        Please input your token by command below\s
+                        Please input your token by command below: \n
                         """
                         +
                         Define.FB_URL_COMMAND + " <action> " +
