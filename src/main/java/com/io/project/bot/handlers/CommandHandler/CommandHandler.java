@@ -62,20 +62,16 @@ public class CommandHandler{
                     Individual Posts bot is responsible for importing Posts into \
                     the crawler system from external network, commands includes:\
                     \n
-                     /start           check bot status
-                   \s
-                     /password        login to command
-                   \s
-                     /help        commands instruction
-                   \s
-                    \s"""   +
+                     /start           check bot status \n
+                     /password        login to command \n
+                     /help        commands instruction \n
+                    """   +
                     Define.FB_ID_COMMAND + " add target_id\n" +
                     Define.FB_URL_COMMAND + " add facebook post\n" +
                     Define.YT_COMMAND + " add youtube posts\n" +
                     Define.TIKTOK_COMMAND + " add tiktok posts\n" +
                     Define.AT_COMMAND + " add article posts\n" +
-                    """
-                     /logout          log out\s""");
+                    "/logout          log out\n ");
         }
         else if (ruleRequest.checkNumLogin(userId)==0) {
             response.setText("Num login over limit");
