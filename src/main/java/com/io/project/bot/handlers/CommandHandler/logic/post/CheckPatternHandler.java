@@ -50,7 +50,7 @@ public class CheckPatternHandler {
             logger.info("All links passed matched pattern");
             return true;
         } else {
-            response.setText("Failed to push " + platform + " for some URLs, Please try again.");
+            response.setText("Missing action /Failed to push " + platform + " for some URLs, Please try again.");
         }
         return false;
     }
@@ -71,7 +71,7 @@ public class CheckPatternHandler {
             case "facebook_url" -> {
                 FacebookPusher facebookPusher = new FacebookPusher();
                 String res = facebookPusher.pushLink(urlOrId);
-                if (res.equals("success")) {
+                if (res.equals("OK")) {
                     response.setText("Push success");
                 } else {
                     response.setText("Push fail");
@@ -81,7 +81,7 @@ public class CheckPatternHandler {
             case "youtube" -> {
                 YoutubePusher youtubePusher = new YoutubePusher();
                 String res = youtubePusher.pushLink(urlOrId,action);
-                if (res.equals("Add message success")) {
+                if (res.equals("Success")) {
                     response.setText("Push success");
                 } else {
                     response.setText("Push fail");
