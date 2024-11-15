@@ -60,33 +60,18 @@ public class CheckPatternHandler {
             case "facebook_target_id" -> {
                 FacebookPusher facebookPusher = new FacebookPusher();
                 FacebookIdModel facebookIdModel = new FacebookIdModel(urlOrId.get(0));
-                String res = facebookPusher.pushTargetIdData(facebookIdModel);
-                if (res.equals("Add message success")) {
-                    response.setText("Push success");
-                } else {
-                    response.setText("Push fail");
-                    logger.error("Error post facebook_target_id api: {}",res);
-                }
+                String res = facebookPusher.pushTargetIdData(facebookIdModel).toString();
+                response.setText(res);
             }
             case "facebook_url" -> {
                 FacebookPusher facebookPusher = new FacebookPusher();
-                String res = facebookPusher.pushLink(urlOrId);
-                if (res.equals("OK")) {
-                    response.setText("Push success");
-                } else {
-                    response.setText("Push fail");
-                    logger.error("Error post facebook_url api: {}",res);
-                }
+                String res = facebookPusher.pushLink(urlOrId).toString();
+                response.setText(res);
             }
             case "youtube" -> {
                 YoutubePusher youtubePusher = new YoutubePusher();
-                String res = youtubePusher.pushLink(urlOrId,action);
-                if (res.equals("Success")) {
-                    response.setText("Push success");
-                } else {
-                    response.setText("Push fail");
-                    logger.error("Error post youtube api: {}",res);
-                }
+                String res = youtubePusher.pushLink(urlOrId,action).toString();
+                response.setText(res);
             }
             case "tiktok" -> {
                 // TO DO
@@ -94,12 +79,7 @@ public class CheckPatternHandler {
             case "article" -> {
                 ArticlePusher articlePusher = new ArticlePusher();
                 ArticleResSchema res = articlePusher.pushLink(urlOrId);
-                if (res.getMessage().equals("Success")) {
-                    response.setText("Push success");
-                } else {
-                    response.setText("Push fail");
-                    logger.error("Error post article api: {}",res);
-                }
+                response.setText(res.toString());
             }
         }
     }
