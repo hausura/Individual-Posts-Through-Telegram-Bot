@@ -14,4 +14,12 @@ public class ArticleResSchema {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "ArticleResSchema{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", data='" + data + '\'' +
+                '}';
+    }
 }
