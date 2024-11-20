@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ec07ae7-7f42-4ea6-b8a7-42bfa288c52f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/TiktokPusher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/CheckPatternHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/CheckPatternHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/PostHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/PostHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/config/AllConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/config/AllConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/config/Define.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/config/Define.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/FacebookPusher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/FacebookPusher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/model/TiktokModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/model/TiktokModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,24 +37,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.AllConfig.executor": "Run",
-    "Application.App.executor": "Run",
-    "Application.CommandHandler.executor": "Run",
-    "Application.com.io.project.App.executor": "Run",
-    "Application.com.viettel.project.App.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/IndividualPostsThroughTelegramBot",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.AllConfig.executor&quot;: &quot;Run&quot;,
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CommandHandler.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.io.project.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.viettel.project.App.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/IndividualPostsThroughTelegramBot&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\Individual Posts Through Telegram Bot\src\main\resources" />

@@ -4,6 +4,7 @@ import com.io.project.bot.rule.RuleRequest;
 import com.io.project.model.FacebookIdModel;
 import com.io.project.service.Pusher.ArticlePusher;
 import com.io.project.service.Pusher.FacebookPusher;
+import com.io.project.service.Pusher.TiktokPusher;
 import com.io.project.service.Pusher.YoutubePusher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +74,9 @@ public class CheckPatternHandler {
                 response.setText(res);
             }
             case "tiktok" -> {
-                // TO DO
+                TiktokPusher tiktokPusher = new TiktokPusher();
+                String res = tiktokPusher.pushLink(urlOrId,action).toString();
+                response.setText(res);
             }
             case "article" -> {
                 ArticlePusher articlePusher = new ArticlePusher();
