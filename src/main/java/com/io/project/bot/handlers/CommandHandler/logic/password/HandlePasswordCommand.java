@@ -30,8 +30,12 @@ public class HandlePasswordCommand {
                         "<insert_your_link_here> \n" +
                         Define.YT_COMMAND + " <action> " +
                         "<insert_your_link_here> \n" +
-                        Define.TIKTOK_COMMAND + " <action> " +
+                        Define.TIKTOK_COMMAND + " " + Define.TIKTOK_URL_COMMENT_ACTION + " " +
                         "<insert_your_link_here> \n" +
+                        Define.TIKTOK_COMMAND + " " + Define.TIKTOK_URL_INFO_ACTION + " " +
+                        "<insert_your_link_here> \n" +
+                        Define.TIKTOK_COMMAND + " " + Define.TIKTOK_KEYWORD_ACTION + " " +
+                        "<insert_your_keyword_here> \n" +
                         Define.AT_COMMAND + " <action> " +
                         "<insert_your_link_here> \n"
                 );

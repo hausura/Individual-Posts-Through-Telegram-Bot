@@ -3,7 +3,7 @@ package com.io.project.bot.handlers.CommandHandler.logic.post;
 import com.io.project.bot.rule.RuleRequest;
 import com.io.project.service.Pusher.ArticlePusher;
 import com.io.project.service.Pusher.FacebookPusher.FbPushContext;
-import com.io.project.service.Pusher.TiktokPusher;
+import com.io.project.service.Pusher.TiktokPusher.TiktokPushContext;
 import com.io.project.service.Pusher.YoutubePusher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,8 +67,8 @@ public class CheckPatternHandler {
                 response.setText(res);
             }
             case "tiktok" -> {
-                TiktokPusher tiktokPusher = new TiktokPusher();
-                String res = tiktokPusher.pushLink(urlOrId,action);
+                TiktokPushContext tiktokPushContext = new TiktokPushContext(action);
+                String res = tiktokPushContext.push(urlOrId.get(0),action);
                 response.setText(res);
             }
             case "article" -> {

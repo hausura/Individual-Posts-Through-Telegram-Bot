@@ -31,6 +31,7 @@ public class TiktokModel {
     }
 
     public static String getTikTokVideoId(String url) {
+
         String regex = "https?://(?:www\\.)?tiktok\\.com/(?:@[\\w.-]+/)?video/(\\d+)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(url);

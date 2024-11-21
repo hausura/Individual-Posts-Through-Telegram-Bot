@@ -70,6 +70,9 @@ public class CommandHandler{
                     Define.FB_URL_COMMAND + " " + Define.FB_URL_ACTION + " " + " add facebook post\n" +
                     Define.YT_COMMAND + " <action> " +  " add youtube posts\n" +
                     Define.TIKTOK_COMMAND + " <action> " +  " add tiktok posts\n" +
+                    Define.TIKTOK_COMMAND + " " + Define.TIKTOK_URL_INFO_ACTION + " " +  " add tiktok info\n" +
+                    Define.TIKTOK_COMMAND + " " + Define.TIKTOK_URL_COMMENT_ACTION + " " +  " add tiktok comments\n" +
+                    Define.TIKTOK_COMMAND + " " + Define.TIKTOK_KEYWORD_ACTION + " " +  " add tiktok keyword\n" +
                     Define.AT_COMMAND + " <action> " +  " add article posts\n" +
                     "/logout          log out\n ");
         }
