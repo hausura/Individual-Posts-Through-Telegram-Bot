@@ -5,10 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ec07ae7-7f42-4ea6-b8a7-42bfa288c52f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/TiktokPusher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/FacebookPusher/FbPushContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/FacebookPusher/Strategy/FbLinkPusher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/FacebookPusher/Strategy/FbPushStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/FacebookPusher/Strategy/FbTargetIdPusher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/extractor/Extractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/extractor/Extractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/password/HandlePasswordCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/password/HandlePasswordCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/CheckPatternHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/CheckPatternHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/model/TiktokModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/model/TiktokModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/PostHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/handlers/CommandHandler/logic/post/PostHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/bot/rule/RuleRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/bot/rule/RuleRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/config/AllConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/config/AllConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/config/Define.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/config/Define.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/ArticlePusher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/ArticlePusher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/FacebookPusher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/TiktokPusher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/TiktokPusher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/YoutubePusher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/io/project/service/Pusher/YoutubePusher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/blackList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/blackList.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +33,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>

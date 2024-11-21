@@ -10,12 +10,10 @@ public class Extractor {
     public static final Logger logger = LoggerFactory.getLogger(Extractor.class);
 
     public static String extractPassword(String rawPassword){
-        int rawPasswordLength= rawPassword.length();
-        String lastSymbol=rawPassword.substring(rawPasswordLength-1,rawPasswordLength);
-        if (Arrays.asList(rawPassword.split("<")).size() <2| !lastSymbol.equals(">")) {
+        if (Arrays.asList(rawPassword.split(" ")).size() <2) {
             return "";
         }
-        return Arrays.asList(rawPassword.split("<")).get(1).replace(">","");
+        return Arrays.asList(rawPassword.split(" ")).get(1);
     }
 
     public static List<String> extractLink(String fullCommand, String simpleCommand,String action){

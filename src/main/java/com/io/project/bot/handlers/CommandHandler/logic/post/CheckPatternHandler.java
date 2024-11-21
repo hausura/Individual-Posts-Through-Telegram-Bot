@@ -1,9 +1,8 @@
 package com.io.project.bot.handlers.CommandHandler.logic.post;
 
 import com.io.project.bot.rule.RuleRequest;
-import com.io.project.model.FacebookIdModel;
 import com.io.project.service.Pusher.ArticlePusher;
-import com.io.project.service.Pusher.FacebookPusher;
+import com.io.project.service.Pusher.FacebookPusher.FbPushContext;
 import com.io.project.service.Pusher.TiktokPusher;
 import com.io.project.service.Pusher.YoutubePusher;
 import org.slf4j.Logger;
@@ -46,43 +45,41 @@ public class CheckPatternHandler {
         logger.info("Verified/matched link index: {}", doneIndexUrl);
 
         if (errorLinks.isEmpty()) {
-            response.setText("All links passed matched pattern");
             logger.info("All links passed matched pattern");
             return true;
         } else {
-            response.setText("Missing action /Failed to push " + platform + " for some URLs, Please try again.");
+            response.setText("Not match pattern for: " + platform + " with action: "+action);
         }
         return false;
     }
 
     public void pushData(List<String> urlOrId, SendMessage response) {
         switch (platform) {
-            case "facebook_target_id" -> {
-                FacebookPusher facebookPusher = new FacebookPusher();
-                FacebookIdModel facebookIdModel = new FacebookIdModel(urlOrId.get(0));
-                String res = facebookPusher.pushTargetIdData(facebookIdModel).toString();
-                response.setText(res);
-            }
-            case "facebook_url" -> {
-                FacebookPusher facebookPusher = new FacebookPusher();
-                String res = facebookPusher.pushLink(urlOrId.get(0)).toString();
+            case "facebook" -> {
+                logger.info("true platform fb");
+                FbPushContext fbPushContext = new FbPushContext(action);
+                String res = fbPushContext.push(urlOrId.get(0));
                 response.setText(res);
             }
             case "youtube" -> {
                 YoutubePusher youtubePusher = new YoutubePusher();
-                String res = youtubePusher.pushLink(urlOrId,action).toString();
+                String res = youtubePusher.pushLink(urlOrId,action);
                 response.setText(res);
             }
             case "tiktok" -> {
                 TiktokPusher tiktokPusher = new TiktokPusher();
-                String res = tiktokPusher.pushLink(urlOrId,action).toString();
+                String res = tiktokPusher.pushLink(urlOrId,action);
                 response.setText(res);
             }
             case "article" -> {
                 ArticlePusher articlePusher = new ArticlePusher();
                 String res = articlePusher.pushLink(urlOrId);
-                response.setText(res.toString());
+                response.setText(res);
             }
         }
+    }
+
+    public String getAction() {
+        return action;
     }
 }

@@ -42,6 +42,6 @@ public class TiktokPusher {
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage(), e);
         }
-        return "error";
+        return "Error push failed!";
     }
 }

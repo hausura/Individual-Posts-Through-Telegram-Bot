@@ -4,6 +4,7 @@ import com.io.project.bot.handlers.CommandHandler.extractor.Extractor;
 import com.io.project.bot.rule.RuleRequest;
 import com.io.project.config.AllConfig;
 import com.io.project.config.Define;
+import org.jetbrains.annotations.Nullable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.Arrays;
@@ -20,26 +21,42 @@ public class PostHandler {
             return;
         }
 
+        // Check num push
         if (ruleRequest.checkNumPush(userId) == 0) {
             response.setText("Your push time over limit.");
             return;
         }
-        AllConfig allConfig = new AllConfig();
-        allConfig.loadConfig();
-        CheckPatternHandler handler = switch (simpleCommand) {
-            case Define.FB_ID_COMMAND -> new CheckPatternHandler(allConfig.getFB_ID_REGEX(), "facebook_target_id", ruleRequest,action);
-            case Define.FB_URL_COMMAND -> new CheckPatternHandler(allConfig.getFB_URL_REGEX()  , "facebook_url", ruleRequest,action);
-            case Define.YT_COMMAND -> new CheckPatternHandler(allConfig.getYOUTUBE_REGEX(), "youtube", ruleRequest,action);
-            case Define.TIKTOK_COMMAND -> new CheckPatternHandler(allConfig.getTIKTOK_REGEX(), "tiktok", ruleRequest,action);
-            case Define.AT_COMMAND -> new CheckPatternHandler(allConfig.getARTICLE_REGEX(), "article", ruleRequest,action);
-            default -> null;
-        };
+
+        CheckPatternHandler handler = getCheckPatternHandler(ruleRequest, simpleCommand, action);
 
         if (handler != null) {
-            if(handler.processUrls(userId, urlList, response)){
+            if(handler.getAction().isEmpty()) response.setText("Wrong action.");
+
+            else if(handler.processUrls(userId, urlList, response)){
                 // TO DO: add API handle
                 handler.pushData(urlList,response);
+                ruleRequest.updateNumPush(userId);
             }
         }
+    }
+
+    private static @Nullable CheckPatternHandler getCheckPatternHandler(RuleRequest ruleRequest, String simpleCommand, String action) {
+        AllConfig allConfig = new AllConfig();
+        allConfig.loadConfig();
+        CheckPatternHandler handler;
+        if (simpleCommand.equals(Define.FB_ID_COMMAND)  && action.equals(Define.FB_ID_ACTION)) {
+            handler = new CheckPatternHandler(allConfig.getFB_ID_REGEX(), "facebook", ruleRequest, action);
+        } else if (simpleCommand.equals(Define.FB_URL_COMMAND) && action.equals(Define.FB_URL_ACTION)) {
+            handler = new CheckPatternHandler(allConfig.getFB_URL_REGEX(), "facebook", ruleRequest, action);
+        } else if (simpleCommand.equals(Define.YT_COMMAND)) {
+            handler = new CheckPatternHandler(allConfig.getYOUTUBE_REGEX(), "youtube", ruleRequest, action);
+        } else if (simpleCommand.equals(Define.TIKTOK_COMMAND)) {
+            handler = new CheckPatternHandler(allConfig.getTIKTOK_REGEX(), "tiktok", ruleRequest, action);
+        } else if (simpleCommand.equals(Define.AT_COMMAND)) {
+            handler = new CheckPatternHandler(allConfig.getARTICLE_REGEX(), "article", ruleRequest, action);
+        } else {
+            handler = new CheckPatternHandler("","",ruleRequest,"");
+        }
+        return handler;
     }
 }

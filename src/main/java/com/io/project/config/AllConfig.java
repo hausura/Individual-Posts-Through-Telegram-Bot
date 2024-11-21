@@ -45,11 +45,14 @@ public class AllConfig {
     public String TIKTOK_REGEX;
     @Getter
     public String ARTICLE_REGEX;
+    @Getter
+    public String password;
 
     // Get data from config
     @Getter
     private final Map<Long, User> listUser = new HashMap<>();
 
+    public boolean isInUserList(Long id){ return listUser.containsKey(id);}
     public boolean isWhitelisted(Long id) {
         return whitelist.contains(id.toString());
     }
@@ -65,7 +68,7 @@ public class AllConfig {
     public void loadConfig() {
         List<String> whitelist = new ArrayList<>();
         Properties properties = new Properties();
-        String password;
+        String password="";
         String botToken = "";
         String botName = "";
         String geminiApiKey= "";
@@ -90,7 +93,6 @@ public class AllConfig {
             properties.load(input);
 
             // Lấy danh sách whitelist và chia tách thành mảng
-            String whitelistString = properties.getProperty("whitelist");
             password = properties.getProperty("password");
             maxRequest = Integer.parseInt(properties.getProperty("maxRequest"));
             maxLogin = Integer.parseInt(properties.getProperty("maxLogin"));
@@ -109,6 +111,7 @@ public class AllConfig {
             TIKTOK_REGEX = properties.getProperty("TIKTOK_REGEX");
             ARTICLE_REGEX = properties.getProperty("ARTICLE_REGEX");
 
+            String whitelistString = properties.getProperty("whitelist");
             // Khởi tạo user và password trong config
             if (!whitelistString.isBlank()) {
                 String[] whitelistArray = whitelistString.split(",");
@@ -118,7 +121,7 @@ public class AllConfig {
                     listUser.put(user.getUserId(), user);
                 }
             }
-            System.out.println(whitelist);
+            logger.info("{WhiteList: {}}",whitelist);
         } catch (IOException e) {
             logger.error("Lỗi khi đọc file: {}", e.getMessage());
         }
@@ -139,9 +142,36 @@ public class AllConfig {
         this.YOUTUBE_REGEX = YOUTUBE_REGEX;
         this.TIKTOK_REGEX = TIKTOK_REGEX;
         this.ARTICLE_REGEX = ARTICLE_REGEX;
+        this.password=password;
     }
 
     public void updateUserList(Long userId,User user) {
         this.listUser.put(userId, user);
+    }
+
+    public void reloadWhiteList() {
+        List<String> whitelist = new ArrayList<>();
+        Properties properties = new Properties();
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config/config.properties")) {
+            if (input == null) {
+                logger.error("Property file not found");
+            }
+            properties.load(input);
+            String whitelistString = properties.getProperty("whitelist");
+            // Khởi tạo user và password trong config
+            if (!whitelistString.isBlank()) {
+                String[] whitelistArray = whitelistString.split(",");
+                whitelist.addAll(Arrays.asList(whitelistArray));
+            }
+        }
+        catch (IOException e) {
+            logger.error("Lỗi khi đọc file: {}", e.getMessage());
+        }
+        this.whitelist = whitelist;
+    }
+
+    public void addUser(Long userId,String password){
+        User user = new User(userId, password,0,0,false);
+        listUser.put(user.getUserId(), user);
     }
 }

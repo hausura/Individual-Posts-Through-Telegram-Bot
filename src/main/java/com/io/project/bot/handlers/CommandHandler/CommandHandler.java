@@ -22,10 +22,12 @@ public class CommandHandler{
     private final Queue<Long> blackList = new ArrayDeque<>();
     private final AuthService authService;
     private final RuleRequest ruleRequest;
+    private final AllConfig allConfig;
 
     public CommandHandler(AllConfig allConfig) {
         this.authService = new AuthService(allConfig);
         this.ruleRequest = new RuleRequest(allConfig);
+        this.allConfig=allConfig;
     }
 
     // Start from here
@@ -64,12 +66,32 @@ public class CommandHandler{
                      "/start           check bot status \n" +
                      "/password        login to command \n" +
                      "/help        commands instruction \n" +
-                    Define.FB_ID_COMMAND + " add target_id\n" +
-                    Define.FB_URL_COMMAND + " add facebook post\n" +
-                    Define.YT_COMMAND + " add youtube posts\n" +
-                    Define.TIKTOK_COMMAND + " add tiktok posts\n" +
-                    Define.AT_COMMAND + " add article posts\n" +
+                    Define.FB_ID_COMMAND + " " + Define.FB_ID_ACTION + " " + " add target_id\n" +
+                    Define.FB_URL_COMMAND + " " + Define.FB_URL_ACTION + " " + " add facebook post\n" +
+                    Define.YT_COMMAND + " <action> " +  " add youtube posts\n" +
+                    Define.TIKTOK_COMMAND + " <action> " +  " add tiktok posts\n" +
+                    Define.AT_COMMAND + " <action> " +  " add article posts\n" +
                     "/logout          log out\n ");
+        }
+        //0. login check
+        else if (!authService.userInConfig(userId)){
+            response.setText("Your account hasn't been verified yet.");
+        }
+
+        else if (this.allConfig.isWhitelisted(userId)!=this.allConfig.isInUserList(userId)) {
+            logger.info("user in whiteList but not in UserList");
+            allConfig.addUser(userId,allConfig.getPassword());
+            response.setText("Adding your account to property.....,Please login again!");
+        }
+
+        else if (passwordPattern.matcher(command).matches()) {
+            ruleRequest.updateNumLogin(userId);
+            HandlePasswordCommand.handle(command,userId,response,authService);
+        }
+        //Case logged in but wrong pass, syntax, ...
+        //Not logged in success yet
+        else if (!authService.getLoginStatus(userId) & command.startsWith("/add")) {
+            response.setText("Please provide your password by command /password <insert_your_password_here>");
         }
         else if (ruleRequest.checkNumLogin(userId)==0) {
             response.setText("Num login over limit");
@@ -79,19 +101,6 @@ public class CommandHandler{
                 blackListWriter.writeBlackListToFile();
                 logger.info("blackList: {}", blackList);
             }
-        }
-        //0. login check
-        else if (passwordPattern.matcher(command).matches()) {
-            ruleRequest.updateNumLogin(userId);
-            HandlePasswordCommand.handle(command,userId,response,authService);
-        }
-        //Case logged in but wrong pass, syntax, ...
-        //Not logged in success yet
-        else if (!authService.getLoginStatus(userId)) {
-            if (command.startsWith("/add")) {
-                response.setText("Please provide your password by command /password <insert_your_password_here>");
-            }
-            else{response.setText("Not authentic yet and wrong command syntax.");}
         }
         // 0. Logged in success
         else if (authService.getLoginStatus(userId)) {

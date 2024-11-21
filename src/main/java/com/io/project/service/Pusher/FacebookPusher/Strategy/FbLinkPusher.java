@@ -1,4 +1,4 @@
-package com.io.project.service.Pusher;
+package com.io.project.service.Pusher.FacebookPusher.Strategy;
 
 import com.io.project.config.AllConfig;
 import com.io.project.config.Define;
@@ -9,31 +9,29 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
-public class ArticlePusher {
-    private static final Logger logger = LoggerFactory.getLogger(ArticlePusher.class);
+public class FbLinkPusher implements FbPushStrategy {
+    private static final Logger logger = LoggerFactory.getLogger(FbLinkPusher.class);
     private final AllConfig allConfig = new AllConfig();
 
-    public String pushLink(List<String> articleLink){
+    @Override
+    public String push(String fbLink){
         try {
             allConfig.loadConfig();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             RestTemplate restTemplate = new RestTemplate();
 
-            logger.info("Start push article data to server");
-            HttpEntity<List<String>> request =
-                    new HttpEntity<>(articleLink, headers);
+            logger.info("Start push facebook url data to server");
+            HttpEntity<String> request =
+                    new HttpEntity<>(fbLink, headers);
 
             // Log info
-            logger.info(Define.API_URL_LOG,allConfig.getArticleApi());
+            logger.info(Define.API_URL_LOG,allConfig.getFacebookApiUrl());
             logger.info(Define.REQUEST_LOG,request);
 
-            return restTemplate.postForObject(allConfig.getArticleApi(), request, String.class);
-        }
-        catch (Exception e) {
-        logger.error("Unexpected error: {}", e.getMessage(), e);
+            return restTemplate.postForObject(allConfig.getFacebookApiUrl(),request, String.class);
+        } catch (Exception e) {
+            logger.error("Unexpected error: {}", e.getMessage(), e);
         }
         return "Error push failed!";
     }
