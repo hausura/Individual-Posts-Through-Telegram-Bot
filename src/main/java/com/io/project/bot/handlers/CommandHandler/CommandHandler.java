@@ -93,7 +93,7 @@ public class CommandHandler{
         }
         //Case logged in but wrong pass, syntax, ...
         //Not logged in success yet
-        else if (!authService.getLoginStatus(userId) & command.startsWith("/add")) {
+        else if (!authService.getLoginStatus(userId)) {
             response.setText("Please provide your password by command /password <insert_your_password_here>");
         }
         else if (ruleRequest.checkNumLogin(userId)==0) {

@@ -41,10 +41,10 @@ public class TiktokKeywordPusher implements TiktokPushStrategy{
             HttpEntity<List<TiktokModel>> request = new HttpEntity<>(tiktokModelList, headers);
 
             // Log info
-            logger.info(Define.API_URL_LOG,allConfig.getTiktokApi());
+            logger.info(Define.API_URL_LOG,allConfig.getTiktokApiUrl());
             logger.info(Define.REQUEST_LOG,request);
 
-            return restTemplate.postForObject(allConfig.getTiktokApi(), request, String.class);
+            return restTemplate.postForObject(allConfig.getTiktokApiUrl(), request, String.class);
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage(), e);
         }

@@ -12,9 +12,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class App {
+public class IndivPostBotApp {
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger logger = LoggerFactory.getLogger(IndivPostBotApp.class);
 
     public static void main(String[] args) {
         try {

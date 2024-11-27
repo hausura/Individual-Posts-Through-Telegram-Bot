@@ -13,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TiktokLinkPusher implements TiktokPushStrategy{
-    private static final Logger logger = LoggerFactory.getLogger(TiktokLinkPusher.class);
+public class TiktokInfoPusher implements TiktokPushStrategy{
+    private static final Logger logger = LoggerFactory.getLogger(TiktokInfoPusher.class);
     private final AllConfig allConfig = new AllConfig();
     @Override
     public String push(String tiktokLink, String action) {
@@ -36,10 +36,10 @@ public class TiktokLinkPusher implements TiktokPushStrategy{
             HttpEntity<List<TiktokModel>> request = new HttpEntity<>(tiktokModelList, headers);
 
             // Log info
-            logger.info(Define.API_URL_LOG,allConfig.getTiktokApi());
+            logger.info(Define.API_URL_LOG,allConfig.getTiktokApiUrl());
             logger.info(Define.REQUEST_LOG,request);
 
-            return restTemplate.postForObject(allConfig.getTiktokApi(), request, String.class);
+            return restTemplate.postForObject(allConfig.getTiktokApiUrl(), request, String.class);
         } catch (Exception e) {
             logger.error("Unexpected error: {}", e.getMessage(), e);
         }

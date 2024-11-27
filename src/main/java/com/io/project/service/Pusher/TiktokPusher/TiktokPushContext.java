@@ -1,7 +1,9 @@
 package com.io.project.service.Pusher.TiktokPusher;
 
+import com.io.project.config.Define;
+import com.io.project.service.Pusher.TiktokPusher.Strategy.TiktokCommentPusher;
 import com.io.project.service.Pusher.TiktokPusher.Strategy.TiktokKeywordPusher;
-import com.io.project.service.Pusher.TiktokPusher.Strategy.TiktokLinkPusher;
+import com.io.project.service.Pusher.TiktokPusher.Strategy.TiktokInfoPusher;
 import com.io.project.service.Pusher.TiktokPusher.Strategy.TiktokPushStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +15,11 @@ public class TiktokPushContext {
 
     public TiktokPushContext(String action) {
         logger.info("Tiktok post action:{}",action);
-        if (action.equals("add-url")){
-            this.tiktokPushStrategy = new TiktokLinkPusher();
-        }
-        else this.tiktokPushStrategy = new TiktokKeywordPusher();
+        if (action.equals(Define.TIKTOK_KEYWORD_ACTION)){
+            this.tiktokPushStrategy = new TiktokKeywordPusher();
+        } else if (action.equals(Define.TIKTOK_URL_COMMENT_ACTION)) {
+            this.tiktokPushStrategy = new TiktokCommentPusher();
+        } else this.tiktokPushStrategy = new TiktokInfoPusher();
     }
 
     public String push(String target_id_or_url,String action){

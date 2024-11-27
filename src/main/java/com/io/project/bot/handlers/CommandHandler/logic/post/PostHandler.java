@@ -52,9 +52,9 @@ public class PostHandler {
             handler = new CheckPatternHandler(allConfig.getYOUTUBE_REGEX(), "youtube", ruleRequest, action);
         } else if (simpleCommand.equals(Define.TIKTOK_COMMAND)&& action.equals(Define.TIKTOK_URL_COMMENT_ACTION)) {
             handler = new CheckPatternHandler(allConfig.getTIKTOK_REGEX(), "tiktok", ruleRequest, action);
-        }else if (simpleCommand.equals(Define.TIKTOK_COMMAND)&& action.equals(Define.TIKTOK_URL_INFO_ACTION)) {
+        } else if (simpleCommand.equals(Define.TIKTOK_COMMAND)&& action.equals(Define.TIKTOK_URL_INFO_ACTION)) {
             handler = new CheckPatternHandler(allConfig.getTIKTOK_REGEX(), "tiktok", ruleRequest, action);
-        }else if (simpleCommand.equals(Define.TIKTOK_COMMAND)&& action.equals(Define.TIKTOK_KEYWORD_ACTION)) {
+        } else if (simpleCommand.equals(Define.TIKTOK_COMMAND)&& action.equals(Define.TIKTOK_KEYWORD_ACTION)) {
             handler = new CheckPatternHandler(".*", "tiktok", ruleRequest, action);
         } else if (simpleCommand.equals(Define.AT_COMMAND)) {
             handler = new CheckPatternHandler(allConfig.getARTICLE_REGEX(), "article", ruleRequest, action);

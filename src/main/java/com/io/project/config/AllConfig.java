@@ -32,7 +32,9 @@ public class AllConfig {
     @Getter
     private String articleApi;
     @Getter
-    private String tiktokApi;
+    private String tiktokApiUrl;
+    @Getter
+    private String tiktokApiWall;
 
     // Pattern
     @Getter
@@ -78,7 +80,8 @@ public class AllConfig {
         String facebookApiUrl = "";
         String facebookApiTarget = "";
         String youtubeApi = "";
-        String tiktokApi = "";
+        String tiktokApiUrl = "";
+        String tiktokApiWall = "";
         String articleApi = "";
         String FB_URL_REGEX = "";
         String FB_ID_REGEX = "";
@@ -103,7 +106,8 @@ public class AllConfig {
             facebookApiUrl = properties.getProperty("facebookApiUrl");
             facebookApiTarget = properties.getProperty("facebookApiTarget");
             youtubeApi = properties.getProperty("youtubeApi");
-            tiktokApi = properties.getProperty("tiktokApi");
+            tiktokApiUrl = properties.getProperty("tiktokApiUrl");
+            tiktokApiWall = properties.getProperty("tiktokApiWall");
             articleApi = properties.getProperty("articleApi");
             FB_URL_REGEX = properties.getProperty("FB_URL_REGEX");
             FB_ID_REGEX = properties.getProperty("FB_ID_REGEX");
@@ -135,7 +139,8 @@ public class AllConfig {
         this.facebookApiUrl = facebookApiUrl;
         this.facebookApiTarget = facebookApiTarget;
         this.youtubeApi = youtubeApi;
-        this.tiktokApi = tiktokApi;
+        this.tiktokApiUrl = tiktokApiUrl;
+        this.tiktokApiWall = tiktokApiWall;
         this.articleApi = articleApi;
         this.FB_URL_REGEX = FB_URL_REGEX;
         this.FB_ID_REGEX = FB_ID_REGEX;

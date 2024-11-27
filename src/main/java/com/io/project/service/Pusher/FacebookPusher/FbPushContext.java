@@ -1,5 +1,6 @@
 package com.io.project.service.Pusher.FacebookPusher;
 
+import com.io.project.config.Define;
 import com.io.project.service.Pusher.FacebookPusher.Strategy.FbLinkPusher;
 import com.io.project.service.Pusher.FacebookPusher.Strategy.FbPushStrategy;
 import com.io.project.service.Pusher.FacebookPusher.Strategy.FbTargetIdPusher;
@@ -12,7 +13,7 @@ public class FbPushContext {
 
     public FbPushContext(String action) {
         logger.info("Fb post action:{}",action);
-        if (action.equals("add-url")){
+        if (action.equals(Define.FB_URL_ACTION)){
             this.fbPushStrategy = new FbLinkPusher();
         }
         else this.fbPushStrategy = new FbTargetIdPusher();
