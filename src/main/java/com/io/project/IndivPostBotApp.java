@@ -2,6 +2,7 @@ package com.io.project;
 
 import com.io.project.bot.SimpleBot;
 import com.io.project.config.AllConfig;
+import com.io.project.config.ProxyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -19,6 +20,7 @@ public class IndivPostBotApp {
     public static void main(String[] args) {
         try {
             logger.info("Start chatbot");
+            ProxyManager.getInstance().init();
             // Create an instance of TelegramBotsApi
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             // Config reload Register your bot

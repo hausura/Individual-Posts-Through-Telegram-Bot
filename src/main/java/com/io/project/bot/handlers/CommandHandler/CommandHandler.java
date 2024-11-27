@@ -43,6 +43,8 @@ public class CommandHandler{
         BlackListCheck blackListCheck = new BlackListCheck();
         if(blackList.contains(userId)| blackListCheck.check(userId)) return response;
 
+        if (update.getMessage().getChat().isUserChat()) return null;
+
         //Start and instruction command
         if (command.equals("/start")) {
             //Get user id

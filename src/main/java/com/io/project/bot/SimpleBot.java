@@ -27,6 +27,7 @@ public class SimpleBot extends TelegramLongPollingBot {
             try {
                 if (messageText.startsWith("/")) {
                     SendMessage res = commandHandler.handleCommand(update);
+                    if (res==null) return;
                     execute(res);
                 } else if (messageText.contains(allConfig.getBotName())) {
                     SendMessage res = messageHandler.handleMessage(update);
